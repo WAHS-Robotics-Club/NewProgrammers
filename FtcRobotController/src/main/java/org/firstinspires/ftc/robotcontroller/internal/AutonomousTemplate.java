@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 @Autonomous(name ="Autonomous")
 public class AutonomousTemplate extends LinearOpMode {
-    //variable declerations or methods
+    //variable declarations or methods
 
 
 

@@ -401,7 +401,7 @@ public class FtcRobotControllerActivity extends Activity
     if (preferencesHelper.readBoolean(getString(R.string.pref_wifi_automute), false)) {
       initWifiMute(true);
     }
-    
+
 
     // check to see if there is a preferred Wi-Fi to use.
     checkPreferredChannel();
