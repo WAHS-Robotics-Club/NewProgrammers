@@ -2,6 +2,7 @@ package org.firstinspires.ftc.robotcontroller.internal;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+//WELCOME!
 
 @Autonomous(name ="Autonomous")
 public class AutonomousTemplate extends LinearOpMode {
