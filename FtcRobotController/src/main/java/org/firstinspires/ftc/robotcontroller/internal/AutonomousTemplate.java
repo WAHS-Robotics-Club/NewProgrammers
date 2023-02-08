@@ -15,7 +15,7 @@ public class AutonomousTemplate extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         //INIT PHASE BUTTON PRESSED
         //HardwareMap DcMotors:
-        //create objects
+        //create objectsgit
 
         //PLAY PHASE BUTTON PRESSED
         //Wait for the button and subsequently wait 1/4 secs to start the program:
