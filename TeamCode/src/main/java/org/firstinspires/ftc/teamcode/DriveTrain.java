@@ -59,6 +59,48 @@ public class DriveTrain {
             Thread.sleep(1);
         }
     }
+    public void strafe(double inches1, double power, Telemetry telemetry) throws InterruptedException {
+        double rotations;
+        int targetPosition;
+        boolean isBusy;
+        int i = 0;
+        frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        rotations = (inches1/(4.0*Math.PI));
+        targetPosition = (int)(rotations*1120);
+        frontLeft.setTargetPosition(targetPosition);
+        backLeft.setTargetPosition(-targetPosition);
+        frontRight.setTargetPosition(targetPosition);
+        backRight.setTargetPosition(-targetPosition);
+
+        frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        frontLeft.setPower(power);
+        backLeft.setPower(power);
+        frontRight.setPower(power);
+        backRight.setPower(power);
+        Thread.sleep(1);
+
+
+        if (frontLeft.isBusy() && frontRight.isBusy() && backLeft.isBusy() && backRight.isBusy()) {
+            isBusy = true;
+        } else {
+            isBusy = false;
+        }
+
+        while((frontLeft.isBusy() && frontRight.isBusy() && backLeft.isBusy() && backRight.isBusy()) && i < 500) {
+
+            telemetry.update();
+            i++;
+            Thread.sleep(1);
+        }
+    }
 
     public void turning(int degrees, Telemetry telemetry, BananaFruit gyro) throws InterruptedException {
 
@@ -112,4 +154,36 @@ public class DriveTrain {
             Thread.sleep(1);
         }
     }
+    public void rotate(double amount, double power, Telemetry telemetry, DcMotor dcMotor) throws InterruptedException {
+        double rotations;
+        int targetPosition;
+        boolean isBusy;
+        int i = 0;
+
+        dcMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        targetPosition = (int)(amount*1120);
+        dcMotor.setTargetPosition(-targetPosition);
+        dcMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        dcMotor.setPower(power);
+        Thread.sleep(1);
+
+        if (dcMotor.isBusy()) {
+            isBusy = true;
+        } else {
+            isBusy = false;
+        }
+
+        while(isBusy) {
+            if (dcMotor.isBusy()) {
+                isBusy = true;
+            }
+            else{
+                isBusy = false;
+            }
+            i++;
+            telemetry.update();
+            Thread.sleep(1);
+        }
+    }
+
 }
