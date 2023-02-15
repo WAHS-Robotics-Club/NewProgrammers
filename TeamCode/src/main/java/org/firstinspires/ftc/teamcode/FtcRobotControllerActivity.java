@@ -250,7 +250,7 @@ public class FtcRobotControllerActivity extends Activity
   protected boolean enforcePermissionValidator() {
     if (!permissionsValidated) {
       RobotLog.vv(TAG, "Redirecting to permission validator");
-      Intent permissionValidatorIntent = new Intent(AppUtil.getDefContext(), PermissionValidatorWrapper.class);
+      Intent permissionValidatorIntent = new Intent();
       startActivity(permissionValidatorIntent);
       finish();
       return true;
@@ -740,7 +740,7 @@ public class FtcRobotControllerActivity extends Activity
   }
 
   protected OpModeRegister createOpModeRegister() {
-    return new FtcOpModeRegister();
+    return null;
   }
 
   private void shutdownRobot() {
