@@ -28,6 +28,13 @@ Servo grabber;
     @Override
     public void loop () {
 
+        /*frontL.setPower((-gamepad1.left_stick_y + gamepad1.left_stick_x + gamepad1.right_stick_x));
+            backL.setPower((-gamepad1.left_stick_y + -gamepad1.left_stick_x + gamepad1.right_stick_x));
+            frontR.setPower((gamepad1.left_stick_y + gamepad1.left_stick_x + gamepad1.right_stick_x));
+            backR.setPower((gamepad1.left_stick_y + -gamepad1.left_stick_x + gamepad1.right_stick_x));
+            
+         */
+
         if (gamepad1.y){
             frontLeft.setPower(1);
             backLeft.setPower(1);
