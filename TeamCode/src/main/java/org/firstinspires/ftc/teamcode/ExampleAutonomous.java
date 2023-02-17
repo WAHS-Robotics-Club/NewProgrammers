@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+/*package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 public class ExampleAutonomous extends LinearOpMode {
 
     //DriveTrain DcMotors:
-    DcMotor fl;
+   /* DcMotor fl;
     DcMotor bl;
     DcMotor fr;
     DcMotor br;
@@ -16,10 +16,12 @@ public class ExampleAutonomous extends LinearOpMode {
     DcMotor grab;
     DcMotor carousel;
 
+ */
 
 
 
-    @Override
+
+  /*  @Override
     public void runOpMode() throws InterruptedException {
         //INIT PHASE BUTTON PRESSED
         //HardwareMap DcMotors:
@@ -68,4 +70,4 @@ public class ExampleAutonomous extends LinearOpMode {
 
     }
 }
-
+*/
