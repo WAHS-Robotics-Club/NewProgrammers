@@ -9,11 +9,11 @@ import com.qualcomm.robotcore.hardware.Servo;
 //WELCOME!
 
 
-@TeleOp(name ="Single Driver TeleOp")
+@TeleOp(name ="Single Driver TeleOp Gurmat")
 public class SingleDriver extends OpMode {
     //Variable declarations
 
-DcMotor frontLeft, frontRight, backLeft, backRight, spool, xButton;
+DcMotor frontLeft, frontRight, backLeft, backRight, spool;
 Servo grabber;
     //Initiation process:
     @Override
@@ -25,7 +25,6 @@ Servo grabber;
         backRight = hardwareMap.dcMotor.get("backRight");
         spool = hardwareMap.dcMotor.get("spool");
         grabber = hardwareMap.servo.get("grabber");
-        xButton = hardwareMap.dcMotor.get("xButton");
     }
 
     //Loop process: runs when play is pressed
@@ -47,19 +46,21 @@ Servo grabber;
         } else {
             spool.setPower(0);
         }
-        if (gamepad1.x){
-            xButton.setPower(2000000);
+
+        if(gamepad1.left_trigger>0.01) {
+            spool.setPower(-gamepad1.left_trigger);
         }else{
-            xButton.setPower(0);
+            spool.setPower(0);
         }
 
-        if(gamepad1.right_bumper) {
-            grabber.setPosition((30) * (180 / Math.PI));
+        if(gamepad1.a) {
+            grabber.setPosition((15) * (Math.PI / 180));
         }else if (gamepad1.x){
-            grabber.setPosition(0);
+            grabber.setPosition(30 * (Math.PI/180));
         }
 
         }
+
 
 }
 
