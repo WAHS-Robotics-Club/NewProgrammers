@@ -1,11 +1,11 @@
-//package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 //WELCOME!
 
-//@Autonomous(name ="Autonomous")
-/*public class AutonomousTemplate extends LinearOpMode {
+@Autonomous(name ="Autonomous")
+public class AutonomousTemplate extends LinearOpMode {
     //variable declarations or methods
 
 
@@ -23,4 +23,4 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
         }
     }
-*/
+
