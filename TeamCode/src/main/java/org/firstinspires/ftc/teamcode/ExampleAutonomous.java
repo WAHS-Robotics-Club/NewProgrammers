@@ -1,47 +1,53 @@
-/*package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 
 @Autonomous(name ="Ryan Autonomous Right")
 public class ExampleAutonomous extends LinearOpMode {
 
+    //create DcMotors, or other components of your robot
+
     //DriveTrain DcMotors:
-   /* DcMotor fl;
+    DcMotor fl;
     DcMotor bl;
     DcMotor fr;
     DcMotor br;
     //Appendage DcMotors:
     DcMotor spool;
-    DcMotor grab;
-    DcMotor carousel;
-
- */
+    Servo grabber;
 
 
 
 
-  /*  @Override
+
+
+    @Override
     public void runOpMode() throws InterruptedException {
         //INIT PHASE BUTTON PRESSED
         //HardwareMap DcMotors:
-        fl = hardwareMap.dcMotor.get("frontLeftMotor");
-        bl = hardwareMap.dcMotor.get("backLeftMotor");
-        fr = hardwareMap.dcMotor.get("frontRightMotor");
-        br = hardwareMap.dcMotor.get("backRightMotor");
-        grab = hardwareMap.dcMotor.get("grab");
-        spool = hardwareMap.dcMotor.get("spoolMotor");
-        carousel = hardwareMap.dcMotor.get("carouselSpinner");
+        //assign each object to a hardware map port
+        //****MAKE SURE ALL OBJECTS YOUR ARE ASSIGNING EXIST IN REAL LIFE****
+        fl = hardwareMap.dcMotor.get("frontLeft");
+        fr = hardwareMap.dcMotor.get("frontRight");
+        bl = hardwareMap.dcMotor.get("backLeft");
+        br = hardwareMap.dcMotor.get("backRight");
+        spool = hardwareMap.dcMotor.get("spool");
+        grabber = hardwareMap.servo.get("grabber");
 
-        DriveTrain robot = new DriveTrain(fl,fr,br,bl);
-        BananaFruit gyro = new BananaFruit();
-        gyro.runBananaFruit(hardwareMap, telemetry);
+        //create any objects you may need for your program
+        DriveTrain robot = new DriveTrain(fl,fr,br,bl); //my own drivetrain class, yours might look different
+        BananaFruit gyro = new BananaFruit(); //bananafruit class, which allows us to use gyroscopes built into the android phones
+        gyro.runBananaFruit(hardwareMap, telemetry); //start bananafruit
 
         telemetry.addData("FL Power: ", fl.getPower());
         telemetry.addData("BL Power: ", bl.getPower());
         telemetry.addData("FR Power", fr.getPower());
         telemetry.addData("BR Power", br.getPower());
         telemetry.update();
+
+        //^all code above will be run when init is pressed on the driver station app^
 
 
 
@@ -52,22 +58,14 @@ public class ExampleAutonomous extends LinearOpMode {
         robot.driving(-40, 0.8, telemetry);
         robot.turning(90, telemetry, gyro);
         robot.driving(-1,0.5,telemetry);
-        grab.setPower(-0.2);
-        sleep(1000);
-        grab.setPower(0);
         robot.driving(1,0.5,telemetry);
         robot.turning(0, telemetry, gyro);
         robot.driving(45,0.8, telemetry);
         robot.turning(-90, telemetry, gyro);
         robot.driving(-70, 0.8, telemetry);
-
-
-
-
-
-
-
-
+        //program will end when all tasks are completed
+        //robot will only move onto next task when it completes the previously assigned task.
+        //The robot will complete each method one at a time.
     }
 }
-*/
+
