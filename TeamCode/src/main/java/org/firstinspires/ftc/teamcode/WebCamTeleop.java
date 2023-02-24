@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.firstinspires.ftc.robotcore.external.hardware.camera.Camera;
 
 //WELCOME!
 
@@ -19,7 +19,7 @@ public class WebCamTeleop extends OpMode {
     DcMotor backRight;
     DcMotor spool;
     Servo grabber;
-    WebcamName dank;
+    Camera dank;
 
     //Initiation process:
     @Override
@@ -31,7 +31,7 @@ public class WebCamTeleop extends OpMode {
         backRight = hardwareMap.dcMotor.get("backRight");
         spool = hardwareMap.dcMotor.get("spool");
         grabber = hardwareMap.servo.get("grabber");
-        dank = hardwareMap.get(WebcamName.class, "Webcam 1");
+        dank = hardwareMap.get(Camera.class, "Webcam 1");
     }
 
     //Loop process: runs when play is pressed
