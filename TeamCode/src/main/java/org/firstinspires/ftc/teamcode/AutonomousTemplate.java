@@ -21,7 +21,7 @@ public class AutonomousTemplate extends LinearOpMode {
 
 
 
-        
+
         //PLAY PHASE BUTTON PRESSED
         //Wait for the button and subsequently wait 1/4 secs to start the program:
         waitForStart();
