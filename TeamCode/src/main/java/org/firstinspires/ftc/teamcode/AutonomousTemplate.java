@@ -76,8 +76,6 @@ public class AutonomousTemplate extends LinearOpMode {
             i++;
             Thread.sleep(1);
         }
-
-
         }
     }
 
