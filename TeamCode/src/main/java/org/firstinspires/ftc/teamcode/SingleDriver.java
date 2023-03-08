@@ -1,101 +1,89 @@
 package org.firstinspires.ftc.teamcode;
+import android.annotation.SuppressLint;
 
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.hardware.DcMotor;
 //WELCOME!
 
+@Autonomous(name ="La pepe")
+public class AutonomousTemplate extends LinearOpMode {
+    //variable declarations or methods
+    DcMotor frontLeft, frontRight, backLeft, backRight, spool, chunker;
+    Servo grabber;
 
-@TeleOp(name ="Single Driver TeleOp")
-public class SingleDriver extends OpMode {
-    //Variable declarations
-DcMotor frontLeft, frontRight, backLeft, backRight, spool, chunker;
-Servo grabber;
-    //Initiation process:
+    double rotations;
+
+    int targetPosition;
+
+    boolean isBusy;
+
+    int i =0;
+
+    @SuppressLint("SuspiciousIndentation")
     @Override
-    public void init () {
-        //HardwareMap ALL motors:
-       frontLeft = hardwareMap.dcMotor.get("frontLeft");
-       frontRight = hardwareMap.dcMotor.get("frontRight");
-       backLeft = hardwareMap.dcMotor.get("backLeft");
-       backRight = hardwareMap.dcMotor.get("backRight");
-       spool = hardwareMap.dcMotor.get("spool");
-       grabber = hardwareMap.servo.get("grabber");
-       chunker = hardwareMap.dcMotor.get("chunker");
-    }
+    public void runOpMode() throws InterruptedException {
+        //INIT PHASE BUTTON PRESSED
+        //HardwareMap DcMotors:
+        frontLeft = hardwareMap.dcMotor.get("frontLeft");
+        frontRight = hardwareMap.dcMotor.get("frontRight");
+        backLeft = hardwareMap.dcMotor.get("backLeft");
+        backRight = hardwareMap.dcMotor.get("backRight");
+        spool = hardwareMap.dcMotor.get("spool");
+        grabber = hardwareMap.servo.get("grabber");
+        chunker = hardwareMap.dcMotor.get("chunker");
 
-    //Loop process: runs when play is pressed
-    @Override
-    public void loop () {
 
-        if (gamepad1.y) {
-            frontLeft.setPower(1);
-            backLeft.setPower(1);
-            backRight.setPower(-1);
-            backLeft.setPower(-1);
-        }
-        if (gamepad1.a) {
-            frontLeft.setPower(-1);
-            backLeft.setPower(-1);
-            backRight.setPower(1);
-            backLeft.setPower(1);
-        }
-        if (gamepad1.b) {
-            frontLeft.setPower(-1);
-            backLeft.setPower(-1);
-            backRight.setPower(-1);
-            backLeft.setPower(-1);
-        }
-        if (gamepad1.a) {
-            frontLeft.setPower(1);
-            backLeft.setPower(1);
-            backRight.setPower(1);
-            backLeft.setPower(1);
-        }
-        if (gamepad1.right_trigger > 0) {
-            spool.setPower(gamepad1.right_trigger);
-        }
-        if (gamepad1.left_trigger > 0) {
-            spool.setPower(-gamepad1.left_trigger);
+        //create objects
 
+        //PLAY PHASE BUTTON PRESSED
+        //Wait for the button and subsequently wait 1/4 secs to start the program:
+        waitForStart();
+        sleep(250);
+        frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        rotations = (12/4.0*Math.PI);
+        targetPosition = (int)(rotations*1120);
+        frontRight.setTargetPosition(-targetPosition);
+        frontLeft.setTargetPosition(-targetPosition);
+        backRight.setTargetPosition(targetPosition);
+        backLeft.setTargetPosition(targetPosition);
+
+        frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+        frontRight.setPower(0.8);
+        frontLeft.setPower(0.8);
+        backLeft.setPower(0.8);
+        backRight.setPower(0.8);
+        Thread.sleep(1);
+
+
+        if (frontLeft.isBusy() && frontRight.isBusy()  && backLeft.isBusy() && backRight.isBusy()) {
+            isBusy = true;
         } else {
-            spool.setPower(0);
-        }
-        if (gamepad1.dpad_up) {
-//            grabber.setPosition(30 * (180/Math.PI));
-        }
-        if (gamepad1.dpad_down) {
-            grabber.setPosition(0);
+            isBusy = false;
 
         }
-    }
-        //Loop process: runs when play i pressed
-        @Override
-        public void loop () {
+        while ((frontLeft.isBusy() && frontRight.isBusy()  && backLeft.isBusy() && backRight.isBusy()) && i <500)
 
-      if (gamepad1.left_bumper) {
-          frontLeft.setPower((-gamepad1.left_stick_y + gamepad1.left_stick_x + gamepad1.right_stick_x)/4);
-          backLeft.setPower((-gamepad1.left_stick_y + gamepad2.left_stick_x + gamepad1.right_stick_x/4);
-          frontRight.setPower((-gamepad1.left_stick_y + gamepad2.left_stick_x + gamepad1.right_stick_x/4);
-          backRight .setPower((-gamepad1.left_stick_y + gamepad2.left_stick_x + gamepad1.right_stick_x)/4;
-      }
-      else {
-          frontLeft.setPower((-gamepad1.left_stick_y + gamepad1.left_stick_x + gamepad1.right_stick_x));
-          backLeft.setPower((-gamepad1.left_stick_y + gamepad2.left_stick_x + gamepad1.right_stick_x));
-          frontRight.setPower((-gamepad1.left_stick_y + gamepad2.left_stick_x + gamepad1.right_stick_x));
-          backRight .setPower((-gamepad1.left_stick_y + gamepad2.left_stick_x + gamepad1.right_stick_x));
-      }
-     if (gamepad1.right_trigger > 0) {
-         spool.setPower(gamepad1.right_trigger);
-     }else{
-         spool.setPower(0);
-     }
-     if (gamepad1.right_bumper) {
-         chunker.setPower(1.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001);
-     }else{
-         chunker.setPower(0);
-     }
+            telemetry.update();
+        i++;
+        Thread.sleep(1);
     }
+
+    int targetHeading = 90;
+    boolean isCorrectHeading = false;
+    int currentHeading;
+        frontleft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+
+
 }
+
