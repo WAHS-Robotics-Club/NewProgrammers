@@ -19,6 +19,7 @@ public class AutonomousTemplate extends LinearOpMode {
     boolean isBusy;
     int i = 0;
     BananaFruit gyro = new BananaFruit();
+    DriveTrain robot = new DriveTrain(frontLeft, frontRight, backLeft, backRight);
 
 
     @Override
@@ -39,43 +40,9 @@ public class AutonomousTemplate extends LinearOpMode {
         //Wait for the button and subsequently wait 1/4 secs to start the program:
         waitForStart();
         sleep(250);
-        frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        rotations = (12 / 4.0 * Math.PI);
-        targetPosition = (int) (rotations * 1120);
-        frontLeft.setTargetPosition(-targetPosition);
-        frontRight.setTargetPosition(targetPosition);
-        backLeft.setTargetPosition(-targetPosition);
-        backRight.setTargetPosition(targetPosition);
-
-        frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        frontLeft.setPower(0.8);
-        frontRight.setPower(0.8);
-        backLeft.setPower(0.8);
-        backRight.setPower(0.8);
-        Thread.sleep(1);
-
-        //if (i==0 && x==0){
-        //anything that runs here will work only if both variables are true
-        if (frontLeft.isBusy() && frontRight.isBusy() && backLeft.isBusy() && backRight.isBusy()) {
-            isBusy = true;
-        } else {
-            isBusy = false;
-        }
-
-        while ((frontLeft.isBusy() && frontRight.isBusy() && backLeft.isBusy() && backRight.isBusy()) && i < 500) {
-
-            telemetry.update();
-            i++;
-            Thread.sleep(1);
-        }
+        robot.Drive(0.8, 12, telemetry);
+        //turning
 
         int targetHeading = 90;
         boolean isCorrectHeading = false;
