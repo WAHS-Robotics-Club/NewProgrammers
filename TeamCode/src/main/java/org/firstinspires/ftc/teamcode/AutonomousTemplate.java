@@ -3,17 +3,20 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
+
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 //WELCOME!
 
 @Autonomous(name ="Autonomous")
 public class AutonomousTemplate extends LinearOpMode {
     //variable declarations or methods
-DcMotor frontLeft, frontRight, backLeft, backRight;
+DcMotor frontLeft, frontRight, backLeft, backRight, spool;
 Servo grabber;
 int targetPosition;
 int i = 0;
 boolean isBusy;
 double modifier, basePower, rotations;
+        DriveTrain movement = new DriveTrain(frontLeft, frontRight, backLeft, backRight);
 
 BananaFruit gyro = new BananaFruit();
     @Override
@@ -35,95 +38,19 @@ BananaFruit gyro = new BananaFruit();
         sleep(250);
 
 
-        frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        movement.driveForward(0.8,10, telemetry);
+        spool.setPower(1);
+        sleep(2000);
+        spool.setPower(0);
+        movement.rotate(270, telemetry, gyro);
+        movement.driveForward(0.8,10, telemetry);
+        spool.setPower(-1);
+        sleep(2000);
+        spool.setPower(0);
+        movement.rotate(135, telemetry, gyro);
+        movement.driveForward(0.8,14.14, telemetry);
 
-        rotations=(12/(4*Math.PI));
-        targetPosition = (int)(rotations*1120);
-
-        frontRight.setTargetPosition(targetPosition);
-        backRight.setTargetPosition(targetPosition);
-        frontLeft.setTargetPosition(-targetPosition);
-        frontLeft.setTargetPosition(-targetPosition);
-
-        frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-        backLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-        frontLeft.setPower(0.8);
-
-
-        if (frontLeft.isBusy() && frontLeft.isBusy() && backLeft.isBusy() && backRight.isBusy()){
-            isBusy = true;
-        } else{
-            isBusy = false;
-        }
-
-        while((frontLeft.isBusy() && frontLeft.isBusy() && backLeft.isBusy() && backRight.isBusy()) && i < 500) {
-            telemetry.update();
-            i++;
-            Thread.sleep(1);
-        }
-
-
-
-
-            int targetHeading = 90;
-            boolean isCorrectHeading = false;
-            int currentHeading;
-            frontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            frontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            backLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            backRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-            while(!isCorrectHeading) {
-                telemetry.update();
-                currentHeading = gyro.getHeading();
-
-                if (targetHeading < gyro.getHeading() + 1.25 && targetHeading > gyro.getHeading() - 1.25){
-                    isCorrectHeading = true;
-                } else {
-                    isCorrectHeading = false;
-                }
-
-                if (currentHeading > 145 || currentHeading < -145){
-                    if(currentHeading < 0){
-                        currentHeading += 360;
-                    }
-                }
-
-
-                modifier = ((Math.sqrt(Math.abs(targetHeading - currentHeading)))/2);
-                basePower = 0.1;
-
-                if(targetHeading < currentHeading - 1.25){
-                    frontLeft.setPower(basePower * modifier);
-                    frontRight.setPower(basePower * modifier);
-                    backLeft.setPower(basePower * modifier);
-                    backRight.setPower(basePower * modifier);
-                } else if(targetHeading > currentHeading + 1.25){
-                    frontLeft.setPower(-basePower * modifier);
-                    frontRight.setPower(-basePower * modifier);
-                    backLeft.setPower(-basePower * modifier);
-                    backRight.setPower(-basePower * modifier);
-                } else {
-                    frontLeft.setPower(0);
-                    frontRight.setPower(0);
-                    backLeft.setPower(0);
-                    backRight.setPower(0);
-                }
-                Thread.sleep(1);
-
-
-
-
-            }
-
-
-
-        }
     }
+        }
+
 
