@@ -35,12 +35,22 @@ public class AutonomousTemplate extends LinearOpMode {
         DriveTrain robot = new DriveTrain(frontLeft, frontRight, backLeft, backRight);
 
 
-        //create objects
+        //create objects howdy howdy
 
         //PLAY PHASE BUTTON PRESSED
         //Wait for the button and subsequently wait 1/4 secs to start the program:
         waitForStart();
         sleep(250);
+
+        robot.Drive(0.8,10,telemetry);
+        robot.turning(90, telemetry, gyro);
+        grabber.setPosition(2);
+        sleep(100);
+        grabber.setPosition(0);
+        robot.turning(-90,telemetry, gyro);
+        robot.Drive(0.8,10, telemetry);
+
+
 
 
 
