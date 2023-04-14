@@ -63,6 +63,9 @@ public class ExampleAutonomous extends LinearOpMode {
         robot.driving(45,0.8, telemetry);
         robot.turning(-90, telemetry, gyro);
         robot.driving(-70, 0.8, telemetry);
+
+
+        sleep(2);
         //program will end when all tasks are completed
         //robot will only move onto next task when it completes the previously assigned task.
         //The robot will complete each method one at a time.
