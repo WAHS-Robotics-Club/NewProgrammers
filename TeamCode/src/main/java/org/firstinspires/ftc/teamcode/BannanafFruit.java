@@ -182,7 +182,7 @@ public class BannanafFruit {
     }
 
     public int getHeading() {
-        return (int) angles.firstAngle;
+        return((int)angles.firstAngle);
     }
 }
 

@@ -34,17 +34,8 @@ public class AutonomousTemplate extends LinearOpMode {
         robot = new DriveTrain(frontLeft,frontRight,backLeft,backRight);
 
         //Challenge #1
-        robot.Turn(90,telemetry,gyro);
-        robot.Drive(12, 0.8, telemetry);
-        robot.Turn(180,telemetry,gyro);
-        robot.Drive(12, 0.8, telemetry);
-        robot.Turn(270,telemetry,gyro);
-        robot.Drive(12, 0.8, telemetry);
-        robot.Turn(0,telemetry,gyro);
-        robot.Drive(12, 0.8, telemetry);
-
         //Challenge #2
-        robot.Drive(16,0.8,telemetry);
+       /* robot.Drive(16,0.8,telemetry);
         robot.Turn(-90,telemetry,gyro);
         robot.Drive(2,0.8,telemetry);
         grabber.setPosition(30);
@@ -64,15 +55,25 @@ public class AutonomousTemplate extends LinearOpMode {
         sleep(2000);
         spool.setPower(0);
         robot.Turn(135,telemetry,gyro);
-        robot.Drive(17,0.8,telemetry);
+        robot.Drive(17,0.8,telemetry); */
 
-        //create objects
+        //create objects howdy
 
 
         //PLAY PHASE BUTTON PRESSED
         //Wait for the button and subsequently wait 1/4 secs to start the program:
         waitForStart();
         sleep(250);
+
+        robot.Turn(90,telemetry,gyro);
+        robot.Drive(12, 0.8, telemetry);
+        robot.Turn(180,telemetry,gyro);
+        robot.Drive(12, 0.8, telemetry);
+        robot.Turn(270,telemetry,gyro);
+        robot.Drive(12, 0.8, telemetry);
+        robot.Turn(0,telemetry,gyro);
+        robot.Drive(12, 0.8, telemetry);
+
 
 
     }

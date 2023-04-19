@@ -76,7 +76,7 @@ public class DriveTrain {
             telemetry.update();
             currentHeading = gyro.getHeading();
 
-            if (targetHeading < gyro.getHeading() + 1.25 && targetHeading > gyro.getHeading() - 1.25) {
+            if (targetHeading < gyro.getHeading() + 2 && targetHeading > gyro.getHeading() - 2) {
                 isCorrectHeading = true;
             } else {
                 isCorrectHeading = false;
