@@ -7,10 +7,10 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class DriveTrain{
     public DcMotor frontLeft, frontRight, backLeft, backRight;
     public DriveTrain(DcMotor fl, DcMotor fr, DcMotor bl, DcMotor br){
-        fl = frontLeft;
-        fr = frontRight;
-        bl = backLeft;
-        br = backRight;
+        frontLeft = fl;
+        frontRight = fr;
+        backLeft = bl;
+        backRight = br;
 
     }
 
@@ -19,7 +19,7 @@ public class DriveTrain{
     int targetPosition;
     boolean isBusy;
     int i = 0;
-     frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        frontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -27,10 +27,10 @@ public class DriveTrain{
     rotations= (distance/(4*Math.PI));
     targetPosition = (int)(rotations*1120);
 
-        frontRight.setTargetPosition(targetPosition);
-        backRight.setTargetPosition(targetPosition);
-        frontLeft.setTargetPosition(-targetPosition);
-        frontLeft.setTargetPosition(-targetPosition);
+        frontRight.setTargetPosition(-targetPosition);
+        backRight.setTargetPosition(-targetPosition);
+        frontLeft.setTargetPosition(targetPosition);
+        backLeft.setTargetPosition(targetPosition);
 
         frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         backRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
