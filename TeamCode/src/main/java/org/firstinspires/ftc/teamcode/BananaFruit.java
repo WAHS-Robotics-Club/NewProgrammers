@@ -174,6 +174,6 @@ public class BananaFruit {
     }
 
     public int getHeading(){
-        return (int)angles.firstAngle;
+        return((int)angles.firstAngle);
     }
 }

@@ -26,12 +26,12 @@ public class DriveTrain {
         frontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         backRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
 
-        rotations = (distance / 4.0 * Math.PI);
+        rotations = (distance /(4.0*Math.PI));
         targetPosition = (int) (rotations * 1120);
-        frontLeft.setTargetPosition(-targetPosition);
-        frontRight.setTargetPosition(targetPosition);
-        backLeft.setTargetPosition(-targetPosition);
-        backRight.setTargetPosition(targetPosition);
+        frontLeft.setTargetPosition(targetPosition);
+        frontRight.setTargetPosition(-targetPosition);
+        backLeft.setTargetPosition(targetPosition);
+        backRight.setTargetPosition(-targetPosition);
 
         frontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         frontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);

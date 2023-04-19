@@ -18,8 +18,6 @@ public class AutonomousTemplate extends LinearOpMode {
     int targetPosition;
     boolean isBusy;
     int i = 0;
-    BananaFruit gyro = new BananaFruit();
-    DriveTrain robot = new DriveTrain(frontLeft, frontRight, backLeft, backRight);
 
 
     @Override
@@ -33,6 +31,8 @@ public class AutonomousTemplate extends LinearOpMode {
         spool = hardwareMap.dcMotor.get("spool");
         grabber = hardwareMap.servo.get("grabber");
         DriveTrain robot = new DriveTrain(frontLeft, frontRight, backLeft, backRight);
+        BananaFruit gyro = new BananaFruit();
+        gyro.runBananaFruit(hardwareMap, telemetry);
 
 
         //create objects howdy howdy
@@ -42,13 +42,23 @@ public class AutonomousTemplate extends LinearOpMode {
         waitForStart();
         sleep(250);
 
-        robot.Drive(0.8,10,telemetry);
+        robot.Drive(0.8,20,telemetry);
         robot.turning(90, telemetry, gyro);
-        grabber.setPosition(2);
+        robot.Drive(0.8,40, telemetry);
+        grabber.setPosition(15 *(Math.PI/180));
         sleep(100);
         grabber.setPosition(0);
         robot.turning(-90,telemetry, gyro);
         robot.Drive(0.8,10, telemetry);
+        robot.turning(90, telemetry, gyro);
+        robot.Drive(0.8, 100,telemetry);
+        spool.setPower(0.8);
+        sleep(500);
+        spool.setPower(0);
+        robot.turning(90,telemetry, gyro);
+        robot.Drive(4,400,telemetry);
+        spool.setTargetPosition(0);
+
 
 
 
