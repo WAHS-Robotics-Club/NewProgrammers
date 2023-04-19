@@ -17,7 +17,6 @@ public class AutonomousTemplate extends LinearOpMode {
     int targetPosition;
     int i = 0; //loops
     BannanafFruit gyro = new BannanafFruit();
-    DriveTrain robot = new DriveTrain(frontLeft, frontRight, backLeft, backRight);
 
 
     @Override
@@ -30,6 +29,8 @@ public class AutonomousTemplate extends LinearOpMode {
         backRight = hardwareMap.dcMotor.get("backRight");
         spool = hardwareMap.dcMotor.get("spool");
         grabber = hardwareMap.servo.get("grabber");
+        gyro.runBannanafFruit(hardwareMap, telemetry);
+        DriveTrain robot = new DriveTrain(frontLeft, frontRight, backLeft, backRight);
 
         robot = new DriveTrain(frontLeft,frontRight,backLeft,backRight);
 
@@ -55,7 +56,17 @@ public class AutonomousTemplate extends LinearOpMode {
         sleep(2000);
         spool.setPower(0);
         robot.Turn(135,telemetry,gyro);
-        robot.Drive(17,0.8,telemetry); */
+        robot.Drive(17,0.8,telemetry);
+
+        CHALLENGE#1
+         robot.Turn(90,telemetry,gyro);
+        robot.Drive(12, 0.8, telemetry);
+        robot.Turn(180,telemetry,gyro);
+        robot.Drive(12, 0.8, telemetry);
+        robot.Turn(270,telemetry,gyro);
+        robot.Drive(12, 0.8, telemetry);
+        robot.Turn(0,telemetry,gyro);
+        robot.Drive(12, 0.8, telemetry);*/
 
         //create objects howdy
 
@@ -65,15 +76,24 @@ public class AutonomousTemplate extends LinearOpMode {
         waitForStart();
         sleep(250);
 
-        robot.Turn(90,telemetry,gyro);
-        robot.Drive(12, 0.8, telemetry);
-        robot.Turn(180,telemetry,gyro);
-        robot.Drive(12, 0.8, telemetry);
-        robot.Turn(270,telemetry,gyro);
-        robot.Drive(12, 0.8, telemetry);
-        robot.Turn(0,telemetry,gyro);
-        robot.Drive(12, 0.8, telemetry);
+        //ULTIMATE CHALLENGE!
 
+        grabber.setPosition((0) * (Math.PI / 180));
+        robot.Drive(-46,0.8,telemetry);
+        robot.Turn(-90,telemetry,gyro);
+        robot.Drive(-4,0.8,telemetry);
+        spool.setPower(1);
+        sleep(2000);
+        spool.setPower(0);
+        grabber.setPosition((30) * (Math.PI / 180));
+        spool.setPower(-1);
+        sleep(2000);
+        spool.setPower(0);
+        robot.Drive(4,0.8,telemetry);
+        robot.Turn(180,telemetry,gyro);
+        robot.Drive(-23.5,0.8,telemetry);
+        robot.Turn(90,telemetry,gyro);
+        robot.Drive(-23,0.8,telemetry);
 
 
     }
