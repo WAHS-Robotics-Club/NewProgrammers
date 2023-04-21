@@ -78,18 +78,18 @@ public class AutonomousTemplate extends LinearOpMode {
 
         //ULTIMATE CHALLENGE!
 
-        grabber.setPosition((0) * (Math.PI / 180));
-        robot.Drive(-46,0.8,telemetry);
+        /* grabber.setPosition((0) * (Math.PI / 180));*/
+        robot.Drive(-51,0.8,telemetry);
         robot.Turn(-90,telemetry,gyro);
-        robot.Drive(-4,0.8,telemetry);
         spool.setPower(1);
         sleep(2000);
         spool.setPower(0);
-        grabber.setPosition((30) * (Math.PI / 180));
+        robot.Drive(-4,0.8,telemetry);
+        /*grabber.setPosition((30) * (Math.PI / 180));*/
+        robot.Drive(4,0.8,telemetry);
         spool.setPower(-1);
         sleep(2000);
         spool.setPower(0);
-        robot.Drive(4,0.8,telemetry);
         robot.Turn(180,telemetry,gyro);
         robot.Drive(-23.5,0.8,telemetry);
         robot.Turn(90,telemetry,gyro);
