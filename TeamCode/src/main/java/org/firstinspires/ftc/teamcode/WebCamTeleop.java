@@ -143,6 +143,7 @@ public class WebCamTeleop extends LinearOpMode {
         telemetry.addData(">", "Press Play to start op mode");
         telemetry.update();
         waitForStart();
+        sleep(250);
 
         if (opModeIsActive()) {
             while (opModeIsActive()) {
@@ -193,8 +194,8 @@ public class WebCamTeleop extends LinearOpMode {
                                // br.setPower(0);
                            // }
                             else if (col <500 && col >300){
-                                while(updatedRecognitions.size() > 0)
-                                robot.driving(-12,0.8,telemetry);
+                                while(updatedRecognitions.size() > 0) {
+                                    robot.driving(-12,0.8,telemetry);}
                             }
                         telemetry.update();
                     }
