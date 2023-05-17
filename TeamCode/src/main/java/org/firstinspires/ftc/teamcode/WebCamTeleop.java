@@ -32,6 +32,9 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
+
 import java.util.List;
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
@@ -59,6 +62,13 @@ public class WebCamTeleop extends LinearOpMode {
      * has been downloaded to the Robot Controller's SD FLASH memory, it must to be loaded using loadModelFromFile()
      * Here we assume it's an Asset.    Also see method initTfod() below .
      */
+    DcMotor fl;
+    DcMotor bl;
+    DcMotor fr;
+    DcMotor br;
+    //Appendage DcMotors:
+    DcMotor spool;
+    Servo grabber;
     private static final String TFOD_MODEL_ASSET = "PowerPlay.tflite";
     // private static final String TFOD_MODEL_FILE  = "/sdcard/FIRST/tflitemodels/CustomTeamModel.tflite";
 
@@ -97,11 +107,21 @@ public class WebCamTeleop extends LinearOpMode {
     private TFObjectDetector tfod;
 
     @Override
-    public void runOpMode() {
+    public void runOpMode() throws InterruptedException {
         // The TFObjectDetector uses the camera frames from the VuforiaLocalizer, so we create that
         // first.
         initVuforia();
         initTfod();
+        fl = hardwareMap.dcMotor.get("frontLeft");
+        fr = hardwareMap.dcMotor.get("frontRight");
+        bl = hardwareMap.dcMotor.get("backLeft");
+        br = hardwareMap.dcMotor.get("backRight");
+        spool = hardwareMap.dcMotor.get("spool");
+        grabber = hardwareMap.servo.get("grabber");
+        DriveTrain robot = new DriveTrain(fl, fr, br, bl);
+        BananaFruit gyro = new BananaFruit();
+        gyro.runBananaFruit(hardwareMap, telemetry);
+        int i =0;
 
         /**
          * Activate TensorFlow Object Detection before we wait for the start command.
@@ -145,13 +165,43 @@ public class WebCamTeleop extends LinearOpMode {
                             telemetry.addData("Image", "%s (%.0f %% Conf.)", recognition.getLabel(), recognition.getConfidence() * 100 );
                             telemetry.addData("- Position (Row/Col)","%.0f / %.0f", row, col);
                             telemetry.addData("- Size (Width/Height)","%.0f / %.0f", width, height);
-                        }
+                            if (updatedRecognitions.size() == 0){
+                                fl.setPower(0.3);
+                                fr.setPower(0.3);
+                                bl.setPower(0.3);
+                                br.setPower(0.3);
+                            }
+                            if(col < 300 ){
+                                /*fl.setPower(0.5);
+                                fr.setPower(0.5);
+                                bl.setPower(0.5);
+                                br.setPower(0.5);*/
+                                robot.turning(((int)gyro.getHeading()+8), telemetry, gyro);
+
+                            }
+                            else if(col >500 ){
+                               /* fl.setPower(-0.5);
+                                fr.setPower(-0.5);
+                                bl.setPower(-0.5);
+                                br.setPower(-0.5);*/
+                                robot.turning(((int)gyro.getHeading()-8), telemetry, gyro);
+                            }
+                            //if (updatedRecognitions.size() == 0){
+                               // fl.setPower(0);
+                               // fr.setPower(0);
+                               // bl.setPower(0);
+                               // br.setPower(0);
+                           // }
+                            else if (col <500 && col >300){
+                                while(updatedRecognitions.size() > 0)
+                                robot.driving(-12,0.8,telemetry);
+                            }
                         telemetry.update();
                     }
                 }
             }
-        }
-    }
+        }}}
+
 
     /**
      * Initialize the Vuforia localization engine.

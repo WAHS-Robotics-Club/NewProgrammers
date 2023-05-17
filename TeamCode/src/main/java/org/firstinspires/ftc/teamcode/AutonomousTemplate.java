@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 //WELCOME!
 //hello there
-@Autonomous(name ="Autonomous")
+@Autonomous(name ="Autonomou2s")
 public class AutonomousTemplate extends LinearOpMode {
     //variable declarations or methods
     DcMotor frontLeft;
