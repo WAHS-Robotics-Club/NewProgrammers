@@ -55,13 +55,7 @@ import org.firstinspires.ftc.robotcore.external.tfod.Recognition;
 @Autonomous(name = "WebCammer", group = "Concept")
 public class WebCamTeleop extends LinearOpMode {
 
-    /*
-     * Specify the source for the Tensor Flow Model.
-     * If the TensorFlowLite object model is included in the Robot Controller App as an "asset",
-     * the OpMode must to load it using loadModelFromAsset().  However, if a team generated model
-     * has been downloaded to the Robot Controller's SD FLASH memory, it must to be loaded using loadModelFromFile()
-     * Here we assume it's an Asset.    Also see method initTfod() below .
-     */
+
     DcMotor fl;
     DcMotor bl;
     DcMotor fr;
@@ -124,27 +118,19 @@ public class WebCamTeleop extends LinearOpMode {
         int i =0;
 
         /**
-         * Activate TensorFlow Object Detection before we wait for the start command.
-         * Do it here so that the Camera Stream window will have the TensorFlow annotations visible.
+         * Activate TensorFlow Object Detection before we wait for the start command..
          **/
         if (tfod != null) {
             tfod.activate();
 
-            // The TensorFlow software will scale the input images from the camera to a lower resolution.
-            // This can result in lower detection accuracy at longer distances (> 55cm or 22").
-            // If your target is at distance greater than 50 cm (20") you can increase the magnification value
-            // to artificially zoom in to the center of image.  For best results, the "aspectRatio" argument
-            // should be set to the value of the images used to create the TensorFlow Object Detection model
-            // (typically 16/9).
             tfod.setZoom(1.0, 16.0/9.0);
         }
 
-        /** Wait for the game to begin */
         telemetry.addData(">", "Press Play to start op mode");
         telemetry.update();
         waitForStart();
         sleep(250);
-
+        robot.driving(-5, 0.2, telemetry);
         if (opModeIsActive()) {
             while (opModeIsActive()) {
                 if (tfod != null) {
@@ -153,12 +139,13 @@ public class WebCamTeleop extends LinearOpMode {
                     List<Recognition> updatedRecognitions = tfod.getUpdatedRecognitions();
                     if (updatedRecognitions != null) {
                         telemetry.addData("# Objects Detected", updatedRecognitions.size());
+                        //test to see if this number goes away after object is removed
 
                         // step through the list of recognitions and display image position/size information for each one
                         // Note: "Image number" refers to the randomized image orientation/number
-                        for (Recognition recognition : updatedRecognitions) {
-                            double col = (recognition.getLeft() + recognition.getRight()) / 2 ;
-                            double row = (recognition.getTop()  + recognition.getBottom()) / 2 ;
+                        for (Recognition recognition : updatedRecognitions) { //for each recognition
+                            double col = (recognition.getLeft() + recognition.getRight()) / 2 ; //left and right ends of object
+                            double row = (recognition.getTop()  + recognition.getBottom()) / 2 ; //top and bottom ends of object
                             double width  = Math.abs(recognition.getRight() - recognition.getLeft()) ;
                             double height = Math.abs(recognition.getTop()  - recognition.getBottom()) ;
 
@@ -166,39 +153,28 @@ public class WebCamTeleop extends LinearOpMode {
                             telemetry.addData("Image", "%s (%.0f %% Conf.)", recognition.getLabel(), recognition.getConfidence() * 100 );
                             telemetry.addData("- Position (Row/Col)","%.0f / %.0f", row, col);
                             telemetry.addData("- Size (Width/Height)","%.0f / %.0f", width, height);
-                            if (updatedRecognitions.size() == 0){
-                                fl.setPower(0.3);
-                                fr.setPower(0.3);
-                                bl.setPower(0.3);
-                                br.setPower(0.3);
-                            }
+                            telemetry.update();
+
                             if(col < 300 ){
                                 /*fl.setPower(0.5);
                                 fr.setPower(0.5);
                                 bl.setPower(0.5);
                                 br.setPower(0.5);*/
-                                robot.turning(((int)gyro.getHeading()+8), telemetry, gyro);
-
+                                robot.turning(((int)gyro.getHeading()+5), telemetry, gyro);
                             }
                             else if(col >500 ){
                                /* fl.setPower(-0.5);
                                 fr.setPower(-0.5);
                                 bl.setPower(-0.5);
                                 br.setPower(-0.5);*/
-                                robot.turning(((int)gyro.getHeading()-8), telemetry, gyro);
+                                robot.turning(((int)gyro.getHeading()-5), telemetry, gyro);
                             }
-                            //if (updatedRecognitions.size() == 0){
-                               // fl.setPower(0);
-                               // fr.setPower(0);
-                               // bl.setPower(0);
-                               // br.setPower(0);
-                           // }
                             else if (col <500 && col >300){
-                                while(updatedRecognitions.size() > 0) {
-                                    robot.driving(-12,0.8,telemetry);}
+                                    robot.driving(-20,0.8,telemetry);
+                                    terminateOpModeNow();
                             }
-                        telemetry.update();
                     }
+
                 }
             }
         }}}
@@ -220,9 +196,6 @@ public class WebCamTeleop extends LinearOpMode {
         vuforia = ClassFactory.getInstance().createVuforia(parameters);
     }
 
-    /**
-     * Initialize the TensorFlow Object Detection engine.
-     */
     private void initTfod() {
         int tfodMonitorViewId = hardwareMap.appContext.getResources().getIdentifier(
                 "tfodMonitorViewId", "id", hardwareMap.appContext.getPackageName());
