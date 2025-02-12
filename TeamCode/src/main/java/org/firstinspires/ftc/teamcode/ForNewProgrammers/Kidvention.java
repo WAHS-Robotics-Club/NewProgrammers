@@ -11,7 +11,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 @TeleOp(name ="safeDrive")
 @Disabled
 public class Kidvention extends OpMode {
-    //Variable declarations
+    //Variable declarations yos
     DcMotor frontLeft;
     DcMotor frontRight;
     DcMotor backLeft;

@@ -52,7 +52,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 public class WebCamTeleop extends LinearOpMode {
 
     /*
-
+    What is vuforia? It's basically camera stuff. I (Marcus, 2025) don't really understand it.
 
     DcMotor fl;
     DcMotor bl;

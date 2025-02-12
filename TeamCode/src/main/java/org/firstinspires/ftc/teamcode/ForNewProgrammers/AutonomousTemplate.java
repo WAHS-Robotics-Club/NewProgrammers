@@ -10,7 +10,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 @Autonomous(name ="Autonomou2s")
 @Disabled
 public class AutonomousTemplate extends LinearOpMode {
-    //variable declarations or methods
+    //variable declarations or methods howdy
     DcMotor frontLeft;
     DcMotor frontRight;
     DcMotor backLeft;

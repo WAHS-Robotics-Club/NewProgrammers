@@ -9,7 +9,7 @@ import org.firstinspires.ftc.teamcode.Tool.Toggle;
 
 public class DriveTrain {
     //Initializing the dc motor objects:
-    //Gradle Evil
+    //Gradle Evil Yes
 
     public DcMotor flMotor;
     public DcMotor frMotor;

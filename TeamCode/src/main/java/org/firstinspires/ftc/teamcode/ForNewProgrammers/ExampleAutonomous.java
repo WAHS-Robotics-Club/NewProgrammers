@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-@Autonomous(name ="Ryan Autonomous Right")
+@Autonomous(name ="Ryan (The Goat) Autonomous Right")
 @Disabled
 public class ExampleAutonomous extends LinearOpMode {
     /*

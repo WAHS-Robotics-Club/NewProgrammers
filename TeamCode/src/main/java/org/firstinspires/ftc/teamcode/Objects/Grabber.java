@@ -21,7 +21,7 @@ public class Grabber {
     private Toggle YoinkToggle;
 
     public static Grabber initGrabber(HardwareMap hardwareMap) {
-        //Creates and hardware maps the grabber element
+        //Creates and hardware maps the grabber element yo
         Grabber grabber = new Grabber();
         grabber.YoinkR = hardwareMap.servo.get("YoinkR");
         grabber.YoinkL = hardwareMap.servo.get("YoinkL");
