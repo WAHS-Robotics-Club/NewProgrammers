@@ -36,8 +36,8 @@ public class AutonomousTemplate extends LinearOpMode {
         backRight = hardwareMap.dcMotor.get("backRight");
         spool = hardwareMap.dcMotor.get("spool");
         grabber = hardwareMap.servo.get("grabber");
-        BananaFruit gyro = new BananaFruit();
-        gyro.runBananaFruit(hardwareMap, telemetry);
+        //BananaFruit gyro = new BananaFruit();
+        //gyro.runBananaFruit(hardwareMap, telemetry);
 
 
 
